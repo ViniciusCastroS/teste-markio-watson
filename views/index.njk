@@ -1,0 +1,31 @@
+{% extends 'layout.njk' %}
+
+{% block content %}
+  <section class="page-content">
+    <section class="col-1">
+      <hgroup>
+        <h2 class="title">Comentário</h2>
+      </hgroup>
+      <form class="form">
+        <textarea class="form-control" id="texto" rows="3"></textarea>
+        <button class="button" type="button" onclick="myFunction()">Cadastrar</button>
+      </form>
+    </section>
+    <div class="line"></div>
+    <section class="col-2">
+      <hgroup>
+        <h2 class="title">Comentários</h2>
+      </hgroup>
+      <ul id="list">
+        {% for comment in item -%}
+        <li>
+          <p>{{ comment.text }}</p>
+          <button class="button" type="button">Ouvir</button>
+        </li> 
+        {%- endfor %}
+      </ul>
+    </section>
+  </div>
+</section>
+
+{% endblock content %}
