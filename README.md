@@ -1,4 +1,3 @@
-<p align="center"><a href="https://github.com/ViniciusCastroS/teste-markio-watson" alt="Watson Logo"><img src="https://i0.wp.com/silversharksolutions.com.br/wp-content/uploads/2018/07/IBM-Watson_logo2-e1493752611672.png?fit=400%2C300&ssl=1"></a></p>
 <p align="center"><h1 align="center">Watson Text to Speech</h1></p>
 
 ## Funções
