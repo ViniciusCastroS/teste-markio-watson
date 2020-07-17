@@ -3,6 +3,12 @@ const routes = express.Router();
 const comments = require("./public/script");
 const db = require("./database/controllers/controller");
 const axios = require('axios')
+require('dotenv').config()
+
+const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
+const { IamAuthenticator } = require('ibm-watson/auth');
+const fs = require('fs');
+const { text } = require("express");
 
 routes.get('/', function(req, res) {
 
@@ -18,7 +24,41 @@ routes.get('/', function(req, res) {
 });
 
 
-routes.post("/create/comment", db.create);
+routes.post("/create/comment", function(req, res, next) {
+
+    db.create(req, res);
+    next();
+
+}, function(req, res, next) {
+    const commentText = req.body.title;
+    const fileName = commentText.replace(/\s+/g, '_')
+    const textToSpeech = new TextToSpeechV1({
+        authenticator: new IamAuthenticator({
+            apikey: process.env.PRIVATE_KEY,
+        }),
+        url: 'https://api.us-south.text-to-speech.watson.cloud.ibm.com',
+    });
+    const synthesizeParams = {
+        text: commentText,
+        accept: 'audio/wav',
+        voice: 'pt-BR_IsabelaV3Voice',
+    };
+
+    textToSpeech.synthesize(synthesizeParams)
+        .then(response => {
+            return textToSpeech.repairWavHeaderStream(response.result);
+        })
+        .then(buffer => {
+            fs.writeFileSync(`public/audio/${fileName}.wav`, buffer);
+        })
+        .catch(err => {
+            console.log('error:', err);
+        });
+});
+
+routes.get("/listen", function(req, res) {
+
+})
 
 routes.get("/find/comments", db.findAll);
 

@@ -8,7 +8,7 @@
       </hgroup>
       <form class="form">
         <textarea class="form-control" id="texto" rows="3"></textarea>
-        <button id="form-button" class="button" type="button" onclick="getComments()">Cadastrar</button>
+        <button id="form-button" class="button" type="button">Cadastrar</button>
       </form>
     </section>
     <div class="line"></div>
@@ -20,7 +20,10 @@
         {% for comment in item -%}
         <li>
           <p>{{ comment.title }}</p>
-          <button class="button" type="button">Ouvir</button>
+          <button class='listener button' type="button">Ouvir</button>
+          <audio id='{{ comment.id }}'>
+            <source id="source" type="audio/wav">
+          </audio>
         </li> 
         {%- endfor %}
       </ul>
