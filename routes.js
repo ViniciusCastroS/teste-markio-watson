@@ -7,9 +7,8 @@ require('dotenv').config()
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 const fs = require('fs');
-const { text } = require("express");
 
-routes.get('/', function(req, res) {
+routes.get('/', function(_, res) {
 
     let data = [];
     axios.get("http://localhost:8080/find/comments")
@@ -28,7 +27,7 @@ routes.post("/create/comment", function(req, res, next) {
     db.create(req, res);
     next();
 
-}, function(req, res, next) {
+}, function(req, _) {
     const commentText = req.body.title;
     const fileName = commentText.replace(/\s+/g, '_')
     const textToSpeech = new TextToSpeechV1({
@@ -54,10 +53,6 @@ routes.post("/create/comment", function(req, res, next) {
             console.log('error:', err);
         });
 });
-
-routes.get("/listen", function(req, res) {
-
-})
 
 routes.get("/find/comments", db.findAll);
 
