@@ -11,6 +11,7 @@ db.sequelize.sync();
 const server = express();
 
 server.use(express.static('public'));
+server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(routes);
 server.set('view engine', 'njk');

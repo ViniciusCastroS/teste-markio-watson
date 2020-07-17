@@ -2,12 +2,28 @@
 <html>
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css">
     <meta charset="utf-8">
 </head>
 
 <body>
     {% block content %} {% endblock %}
-    <script src="script.js"></script>
+    <script>
+        $('#form-button').click(function() {
+        var text = $('.form-control').val();
+        $.ajax
+        ({ 
+            url: '/create/comment',
+            data: {"title": text},
+            type: 'post',
+            success: function(result)
+          {
+               alert("deu bom carai");
+           }
+        });
+});
+</script>
 </body>
 </html>

@@ -1,10 +1,20 @@
 const express = require("express");
 const routes = express.Router();
-const comments = require("./mock");
+const comments = require("./public/script");
 const db = require("./database/controllers/controller");
+const axios = require('axios')
 
 routes.get('/', function(req, res) {
-    return res.render('index', { item: comments });
+
+    let data = [];
+    axios.get("http://localhost:8080/find/comments")
+        .then(response => {
+            response.data.forEach(element => {
+                data.push(element);
+            });
+        }).then(response => {
+            res.render('index', { item: data });
+        });
 });
 
 

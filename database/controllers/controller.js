@@ -3,6 +3,7 @@ const dbColl = db.database;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
+
     // Validate request
     if (!req.body.title) {
         res.status(400).send({
