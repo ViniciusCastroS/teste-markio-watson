@@ -17,11 +17,11 @@ let mysqlCon = mysql.createConnection({
 mysqlCon.connect(function(err) {
 
     mysqlCon.query('SHOW DATABASES LIKE testdb',
-        function(err, result) {
+        function(err) {
             if (err) {
                 mysqlCon.query(
                     'CREATE DATABASE testdb',
-                    function(err, result) {
+                    function(err) {
                         if (!err) {
                             db.sequelize.sync().then(() => {
                                 console.log('Database connected successfully!');
