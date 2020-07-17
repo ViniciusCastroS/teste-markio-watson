@@ -1,12 +1,46 @@
 const express = require("express");
 const nunjucks = require("nunjucks");
 const bodyParser = require("body-parser");
+const mysql = require("mysql2")
 
 
 const routes = require('./routes');
 const db = require("./database/models");
 
 db.sequelize.sync();
+
+let mysqlCon = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD
+});
+
+mysqlCon.connect(function(err) {
+
+    mysqlCon.query('SHOW DATABASES LIKE testdb',
+        function(err, result) {
+            if (err) {
+                mysqlCon.query(
+                    'CREATE DATABASE testdb',
+                    function(err, result) {
+                        if (!err) {
+                            db.sequelize.sync().then(() => {
+                                console.log('Database connected successfully!');
+                            }).catch((err) => {
+                                console.log(err, 'Something went wrong with the Database!');
+                            });
+
+                        }
+                    });
+            }
+        });
+    if (err) {
+        console.log(err.message);
+
+    } else {
+        console.log('Connected!');
+    }
+});
 
 const server = express();
 

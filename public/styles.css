@@ -58,6 +58,7 @@ body {
 
 .form .button {
     width: 100%;
+    cursor: pointer;
 }
 
 .button {
@@ -68,6 +69,7 @@ body {
     letter-spacing: 0.5px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
+    cursor: pointer;
 }
 
 li .button {
@@ -88,7 +90,7 @@ li {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
-    color: var(--light-gray);
+    color: var(--dark-gray);
     margin-bottom: 8px;
     align-items: center;
 }
