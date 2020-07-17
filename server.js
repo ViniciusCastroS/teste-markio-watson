@@ -3,7 +3,6 @@ const nunjucks = require("nunjucks");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2")
 
-
 const routes = require('./routes');
 const db = require("./database/models");
 

@@ -1,6 +1,5 @@
 const express = require("express");
 const routes = express.Router();
-const comments = require("./public/script");
 const db = require("./database/controllers/controller");
 const axios = require('axios')
 require('dotenv').config()
