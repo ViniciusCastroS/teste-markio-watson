@@ -16,7 +16,7 @@ routes.get('/', function(_, res) {
             response.data.forEach(element => {
                 data.push(element);
             });
-        }).then(response => {
+        }).then(() => {
             res.render('index', { item: data });
         });
 });
