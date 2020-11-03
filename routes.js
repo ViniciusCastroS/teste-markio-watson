@@ -11,6 +11,7 @@ const fs = require('fs');
 routes.get('/', function(_, res) {
 
     let data = [];
+    
     axios.get("http://localhost:8080/find/comments")
         .then(response => {
             response.data.forEach(element => {
